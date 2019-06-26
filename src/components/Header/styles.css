@@ -1,0 +1,9 @@
+header{
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-bottom: 1px solid #ccc;
+
+}
