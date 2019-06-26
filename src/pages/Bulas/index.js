@@ -7,20 +7,24 @@ export class ListBulas extends Component {
         bulas: []
     }
 
-    componentDidMount() {
-        fetch(api.get("/bulas"))
-            .then(response => response.json())
-            .then(bulas => this.setState({ bulas }))
-            .catch(e => console.log(e));
+    componentWillMount() {
+        api.get('/bulas')
+            .then(dados => this.setState({bulas: dados.data}))
+            .catch(() => this.setState('erro ao recuperar dados'));
     }
-
+  
     render() {
         const { bulas } = this.state;
         console.log(bulas);
         return (
-            <div>
-                <h2>Bulas</h2>
-            </div>
+            <ul>
+                {this.state.bulas.map(function(item,index){
+                    return <div key={item.id}>
+                            <h1>{item.nomeComercial}</h1>
+                            <h3>{item.fabricante}</h3>
+                        </div>
+                })}
+            </ul>
         );
     }
 }
