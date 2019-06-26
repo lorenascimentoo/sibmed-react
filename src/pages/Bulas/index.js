@@ -8,16 +8,15 @@ export class ListBulas extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bulas: [],
-            bulaId: null
+            bulas: []
         }
         this.handleClick = this.handleClick.bind(this);
     }
-    
-    
+
+
     handleClick(id) {
-        this.setState({ bulaId : id });
         console.log('Clicado');
+        console.log(id);
     }
 
     componentWillMount() {
@@ -28,26 +27,33 @@ export class ListBulas extends Component {
 
     render() {
         const { bulas } = this.state;
-        console.log(bulas);
+
         return (
             <div>
                 <Header title="SIBMED" />
                 <ListGroup>
-                    {this.state.bulas.map(function (item, index) {
-                        return (
-                            <button type="submit" key={item.id} >
-                                    <ListGroupItem  action>
-                                        <ListGroupItemHeading>{item.nomeComercial}</ListGroupItemHeading>
-                                        <ListGroupItemText>{item.fabricante}</ListGroupItemText>
-                                    </ListGroupItem>
-                            </button>
-                        )
-                    })}
-                </ListGroup>
+                {
+                    bulas.map(bula => (
+                            <ListGroupItem key={bula.id} tag="button" onClick={() => this.handleClick(bula.id)} action>
+                                <ListGroupItemHeading>{bula.nomeComercial}</ListGroupItemHeading>
+                                <ListGroupItemText>{bula.fabricante}</ListGroupItemText>
+                            </ListGroupItem>
+                    ))
+                }
+                 </ListGroup>
+
                 <Button color="primary" size="lg" >Inserir</Button>{' '}
                 <Button color="secondary" size="lg" >Pesquisar</Button>
 
             </div>
+        )
+    }
+}
+
+export class BulaId extends Component {
+    render() {
+        return (
+            <Header title="Listando bula" />
         )
     }
 }
