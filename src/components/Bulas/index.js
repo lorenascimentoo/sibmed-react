@@ -47,18 +47,66 @@ export class ListBulas extends Component {
 export class BulaId extends Component{
 
     state = {
-        id: this.props.match.params
+        id: null,
+        bula : {
+            contraIndicacao:"",
+            id:"",
+            evidencia: {
+                id:null,
+                categoria:"",
+                principioAtivo:"" ,
+                situacaoPaciente: [],
+            },
+            fabricante:"",
+            indicacao:"",
+            nomeComercial:"",
+            principioAtivo:"",
+            reacaoAdversa:"",
+            usuario:{}
+        }
+    }
+
+    componentDidMount() {
+        const param = this.props.match.params;
+
+        console.log(param.id);
+        api.get(`/bulas/${param.id}`)
+            .then(dados => this.setState({ bula : dados.data }))
+            .catch(e => console.log(e));
     }
 
     render(){
-        
-        const {id} = this.state.id;
-        console.log(id);
-
+        const bula = this.state.bula;
+        console.log(this.state.bula);
         return(
             <div>
-                <h3>Olá, página da Lista com id!</h3>
+                <h3>{bula.nomeComercial}</h3>
+                <h6>{bula.fabricante}</h6>
+
+                <h3>{bula.principioAtivo}</h3>
+
+                <h4>Indicação</h4>
+                <h6>{bula.indicacao}</h6>
+
+                <h4>Contra Indicacao</h4>
+                <h6>{bula.contraIndicacao}</h6>
+
+                <h4>Reacao Adversa</h4>
+                <h6>{bula.reacaoAdversa}</h6>
+
+                <h4>Nível de evidência</h4>
+                <h6>Categoria: {bula.evidencia.categoria}</h6>
+
+                { 
+                    bula.evidencia.situacaoPaciente.map( item => (
+                        <div key={item.id}>
+                            <h6>Estado do paciente: {item.estado}</h6>
+                            <h6>Estado do paciente: {item.periodo}</h6>
+                        </div>
+                    ))
+                }
             </div>
+            
         )
         
     }
