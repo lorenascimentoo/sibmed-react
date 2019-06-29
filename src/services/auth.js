@@ -1,9 +1,10 @@
-export const TOKEN_KEY = "@sibmed-Token";
-export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
-export const getToken = () => localStorage.getItem(TOKEN_KEY);
+export const Token = "@sibmed-Token";
+export const isAuthenticated = () => localStorage.getItem(Token) !== null ;
+export const getToken = () => localStorage.getItem(Token);
 export const login = token => {
-  localStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem(Token, token);
 };
+
 export const logout = () => {
-  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(Token);
 };
