@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
+
 //import Logo from "../../assets/airbnb-logo.svg";
 import api from "../../services/api";
 import { Token } from "../../services/auth";
 
-import { Form, Container } from "./styles";
+import { Form, Container} from "./styles";
 
 class SignIn extends Component {
   state = {
@@ -22,13 +23,9 @@ class SignIn extends Component {
       this.setState({ error: "Preencha e-mail e senha para continuar!" });
     } else {
       try {
-        //api.post("/login", { email, senha })
-          //.then(res => console.log("Console "+res.data))
-          //.then(res => this.setState({ response : res.data}));
-        //var string = JSON.stringify(this.state.response);
         const response = await api.post("/login", { email, senha });
         localStorage.setItem(Token, response.data);
-        this.props.history.push("/upload");
+        this.props.history.push("/painel");
       } catch (err) {
         this.setState({
           error:
@@ -55,7 +52,7 @@ class SignIn extends Component {
           />
           <button type="submit">Entrar</button>
           <hr />
-          <Link to="/signup">Criar conta grátis</Link>
+          <Link to="/cadastro">Cadastre-se</Link>
         </Form>
       </Container>
     );

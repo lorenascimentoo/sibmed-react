@@ -1,19 +1,22 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  margin: 30px;
 `;
 
 export const Form = styled.form`
-  width: 400px;
+  width: 600px;
+  height: 300px;
   background: #fff;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 4px;
   img {
     width: 100px;
     margin: 10px 0 40px;
