@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import GlobalStyle from '../../styles';
 import { Container, Content } from './styles';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import SearchList from '../../components/SearchList';
+import Header from '../../components/Header';
+
 
 import api from "../../services/api";
 
@@ -10,10 +12,7 @@ export class ListBulas extends Component {
         bulas: []
     }
 
-    handleClick(id) {
-        console.log(id);
-        this.props.history.push(`/bula/${id}`);
-    }
+    handleClick  = id => this.props.history.push(`/bula/${id}`);
 
     componentDidMount() {
         api.get("/bulas")
@@ -26,23 +25,10 @@ export class ListBulas extends Component {
         console.log(bulas);
         return (
             <Container>
+                
                 <Content>
-                    <h2>Sibmed</h2>
-                    <ListGroup>
-                        {
-                            bulas.map(bula => (
-                                <ListGroupItem key={bula.id} tag="button" onClick={() => this.handleClick(bula.id)} action>
-                                    <ListGroupItemHeading>
-                                        {bula.nomeComercial}
-                                    </ListGroupItemHeading>
-                                    <ListGroupItemText>
-                                        {bula.fabricante}
-                                    </ListGroupItemText>
-                                </ListGroupItem>
-                            ))
-                        }
-                    </ListGroup>
-
+                <Header />
+                    <SearchList bulas={bulas} handleClick={this.handleClick}/>
                 </Content>
                 <GlobalStyle />
             </Container>
@@ -86,6 +72,7 @@ export class BulaId extends Component {
         console.log(this.state.bula);
         return (
             <Container>
+                
                 <Content>
                 <h4>{bula.nomeComercial}</h4>
                 <h5>{bula.principioAtivo}</h5>

@@ -3,7 +3,8 @@ import api from '../../services/api';
 import GlobalStyle from '../../styles';
 import { Container, Content } from './styles';
 import { Table } from 'reactstrap';
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdCloudUpload } from "react-icons/md";
+import Header from '../../components/Header';
 
 
 export class Painel extends Component {
@@ -19,6 +20,9 @@ export class Painel extends Component {
                 this.props.history.push(`/login`);
             });
     }
+    handlePage(){
+        this.props.history.push(`/upload`);
+    }
     
     handleDelete(id) {
         api.delete(`/bulas/${id}`)
@@ -28,8 +32,8 @@ export class Painel extends Component {
         })
             .catch(e => {
                 console.log(e)
-                //alert('Seu token está expirado, faça login novamente" :)');
-                //this.props.history.push(`/login`);
+                alert('Você não está logado ou seu token está expirado, faça login novamente" :)');
+                this.props.history.push(`/login`);
             });
     }
 
@@ -40,9 +44,8 @@ export class Painel extends Component {
         return (
             <Container>
                 <Content>
-                    <div>
-                        <h2>Sibmed</h2>
-                    </div>
+                    <Header title={"Gestão de Bula"} />
+                    <p>Olá, bem vindo a painel de gestão de bulas!</p>
 
                     <Table hover>
                         <thead>
@@ -70,8 +73,11 @@ export class Painel extends Component {
 
                         </tbody>
                     </Table>
+
+                    <MdCloudUpload size={50} color="#e57878" onClick={() => this.handlePage()}/>
                 </Content>
                 <GlobalStyle />
+                
             </Container>
 
         );

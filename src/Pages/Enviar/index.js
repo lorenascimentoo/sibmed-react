@@ -5,6 +5,7 @@ import GlobalStyle from '../../styles';
 import Upload from '../../components/Upload';
 import FileList from '../../components/FileList';
 import api from '../../services/api';
+import Header from '../../components/Header'
 
 class Envio extends Component {
     state = {
@@ -60,9 +61,16 @@ class Envio extends Component {
         return (
              
                 <Container>
+                    
                     <Content>
+                    <Header title={"Envio de Bula"} />
+                        <p> Verifique se seu arquivo está no padrão aceito pelo sistema:
+                            <strong>principio ativo_nome comercial_fabricante.pdf</strong>
+                        </p>
+                        <p>Ex: aciclovir_aciclofar_belfar.pdf</p>
                         <Upload onUpload={this.handleUpload}/>
                         { !!uploadedFiles.length && (<FileList files={uploadedFiles}/>) }
+
                     </Content>
                     <GlobalStyle />
                 </Container>
