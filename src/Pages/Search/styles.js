@@ -1,33 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const Content = styled.div`
-  width: 100%;
-  height: 60%;
-  max-width: 400px;
-  margin: 30px;
-  background: #fff;
-  border-radius: 4px;
-  padding: 20px;
 `;
 
 export const Form = styled.form`
   width: 400px;
   background: #fff;
+  margin: 2px 600px 0px 600px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  img {
-    width: 100px;
-    margin: 10px 0 40px;
-  }
   p {
     color: #ff3333;
     margin-bottom: 15px;
