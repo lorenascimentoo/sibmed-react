@@ -27,7 +27,17 @@ export class Search extends Component {
         e.preventDefault();
 
         console.log("" + this.state.indicacao + ", " + this.state.contraIndicacao + ", " + this.state.reacaoAdversa + ", " + this.state.principioAtivo);
-        if (this.state.indicacao !== '') {
+        
+        if (this.state.indicacao !== '' && this.state.contraIndicacao !== '' && this.state.reacaoAdversa !== '') {
+            await api.get(`/bulas/busca?indicacao=${this.state.indicacao}&contraIndicacao=${this.state.contraIndicacao}&reacaoAdversa=${this.state.reacaoAdversa}`)
+                .then(res => this.setState({ bulas: res.data }))
+                .catch(e => {
+                    this.setState({
+                        error: "Não foi possível encontrar nenhuma bula com sua pesquisa :( "
+                    })
+                    
+                })
+        } else if (this.state.indicacao !== '') {
             await api.get(`/bulas/busca?indicacao=${this.state.indicacao}`)
                 .then(res => this.setState({ bulas: res.data }))
                 .catch(e => {
@@ -56,7 +66,7 @@ export class Search extends Component {
                     })
                     
                 })  
-        } 
+        }
     };
 
     render() {
